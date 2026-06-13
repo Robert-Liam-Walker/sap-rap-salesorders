@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check abapGit structure
+        run: |
+          test -f .abapgit.xml
+          ls -1 src/*.asddls src/*.asbdef src/*.assrvd src/*.clas.abap
+      - name: Validate XML well-formedness
+        run: |
+          python3 - <<'PY'
+          import glob, sys, xml.dom.minidom as m
+          bad = 0
+          for f in glob.glob('**/*.xml', recursive=True):
+              try:
+                  m.parse(f)
+              except Exception as e:
+                  print("BAD", f, e); bad += 1
+          print("xml checked, bad =", bad)
+          sys.exit(1 if bad else 0)
+          PY
