@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SRVB" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <HEADER>
+    <SERVICEBINDINGNAME>Z_SALESORDER_O4</SERVICEBINDINGNAME>
+    <BINDING_TYPE>ODATA_V4_UI</BINDING_TYPE>
+    <DESCRIPTION>SalesOrders OData V4 UI service binding</DESCRIPTION>
+   </HEADER>
+   <SERVICES>
+    <item>
+     <SERVICE_DEFINITION>Z_SALESORDER_SRVD</SERVICE_DEFINITION>
+     <VERSION>0001</VERSION>
+    </item>
+   </SERVICES>
+  </asx:values>
+ </asx:abap>
+</abapGit>

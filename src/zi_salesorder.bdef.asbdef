@@ -1,0 +1,39 @@
+managed implementation in class ZBP_SALESORDER unique;
+strict ( 2 );
+
+define behavior for ZI_SALESORDER alias SalesOrder
+persistent table ZTSALESORDER
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  field ( numbering : managed, readonly ) SalesOrderUuid;
+  field ( readonly ) CreatedBy, CreatedAt, LastChangedBy, LastChangedAt, LocalLastChangedAt;
+  field ( mandatory ) Title;
+
+  create;
+  update;
+  delete;
+
+  action ( features : instance ) submit result [1] $self;
+
+  determination setInitialStatus on modify { create; }
+  validation validateAmount on save { create; update; field Amount; }
+
+  mapping for ZTSALESORDER
+  {
+    SalesOrderUuid      = salesorder_uuid;
+    SalesOrderId        = salesorder_id;
+    Title           = title;
+    Status          = status;
+    Amount          = amount;
+    CurrencyCode    = currency_code;
+    SalesOrderDate      = salesorder_date;
+    Description     = description;
+    CreatedBy       = created_by;
+    CreatedAt       = created_at;
+    LastChangedBy   = last_changed_by;
+    LastChangedAt   = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

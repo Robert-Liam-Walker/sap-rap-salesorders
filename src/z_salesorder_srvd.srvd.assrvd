@@ -1,0 +1,4 @@
+@EndUserText.label: 'SalesOrders service definition'
+define service Z_SALESORDER_SRVD {
+  expose ZC_SALESORDER as SalesOrder;
+}
